@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>Maximize Your <span class="highlight">Sugarcane Yield</span> with AI</h1>
+        <p class="hero-subtitle">
+            Leverage advanced Machine Learning and Satellite Data to get precise yield predictions for Ahmednagar
+            district taluks.
+        </p>
+        <div class="hero-actions">
+            <a href="/predict" class="cta-button">Start Prediction 🚀</a>
+            <div class="feature-pills">
+                <span>🌧️ Weather Analysis</span>
+                <span>🛰️ NDVI Satellite Data</span>
+                <span>🤖 ML Powered</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <!-- Abstract visual representation of data/farming -->
+        <div class="visual-card">
+            <div class="stat-row">
+                <span class="label">Accuracy</span>
+                <span class="value">94.5%</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Farmers Helped</span>
+                <span class="value">1,200+</span>
+            </div>
+            <div class="graph-visual"></div>
+        </div>
+    </div>
+</section>
+
+<section class="features-grid">
+    <div class="feature-card">
+        <h3>📍 localized</h3>
+        <p>Tailored specifically for A.Nagar District taluks.</p>
+    </div>
+    <div class="feature-card">
+        <h3>⚡ Instant</h3>
+        <p>Get yield estimates in seconds based on current parameters.</p>
+    </div>
+    <div class="feature-card">
+        <h3>📊 Visual</h3>
+        <p>Easy to understand charts and actionable insights.</p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="predict-container">
+    <header class="predict-header">
+        <h2>Yield Prediction Tool</h2>
+        <p>Configure the parameters below.</p>
+    </header>
+
+    <div class="content-grid">
+        <!-- Input Form -->
+        <section class="form-section">
+            <form id="predictionForm">
+                <div class="form-group">
+                    <label for="taluk">Taluk (Region)</label>
+                    <select id="taluk" name="taluk" required>
+                        <option value="Ahmednagar">Ahmednagar</option>
+                        <option value="Rahata">Rahata</option>
+                        <option value="Rahuri">Rahuri</option>
+                        <option value="Sangamner">Sangamner</option>
+                        <option value="Shrigonda">Shrigonda</option>
+                        <option value="Pathardi">Pathardi</option>
+                        <option value="Parner">Parner</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="rainfall">Rainfall (mm)</label>
+                        <input type="number" id="rainfall" name="rainfall" value="500" min="0" max="3000" step="1"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="temperature">Temperature (°C)</label>
+                        <input type="number" id="temperature" name="temperature" value="30" min="0" max="60" step="0.1"
+                            required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="humidity">Humidity (%)</label>
+                        <input type="number" id="humidity" name="humidity" value="65" min="0" max="100" step="1"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ndvi">NDVI (Vegetation Index)</label>
+                        <div class="slider-container">
+                            <input type="range" id="ndvi" name="ndvi" min="0" max="1" step="0.01" value="0.65">
+                            <span id="ndviValue">0.65</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="predict-btn">
+                    Predict Yield <span class="btn-icon">➜</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section class="result-section" id="resultSection">
+            <div class="placeholder-state" id="placeholderState">
+                <div class="pulse-circle"></div>
+                <p>Waiting for input...</p>
+            </div>
+
+            <div class="result-card hidden" id="resultCard">
+                <h3>Predicted Yield</h3>
+
+                <div class="yield-display">
+                    <span class="yield-value" id="yieldValue">0</span>
+                    <span class="unit">tons/ha</span>
+                </div>
+
+                <div class="chart-container">
+                    <div class="bar-group">
+                        <div class="bar-label">Avg</div>
+                        <div class="bar-track">
+                            <div class="bar-fill average" style="width: 60%"></div>
+                        </div>
+                        <div class="bar-value">90</div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-label">Pred</div>
+                        <div class="bar-track">
+                            <div class="bar-fill prediction" id="yieldBar" style="width: 0%"></div>
+                        </div>
+                        <div class="bar-value" id="yieldBarValue">0</div>
+                    </div>
+                </div>
+
+                <p class="result-msg">Optimization suggested based on current weather conditions.</p>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
