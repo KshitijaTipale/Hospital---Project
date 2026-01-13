@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Overview{% endblock %}
+
+{% block content %}
+<h1>Dashboard Overview</h1>
+<p style="color: #64748b; margin-bottom: 2rem;">Welcome back, {{ session.username }}!</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-label">Total Patients</span>
+        <span class="stat-value" id="patient-count">...</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Available Doctors</span>
+        <span class="stat-value" id="doctor-count">...</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Pending Appointments</span>
+        <span class="stat-value" id="appointment-count">...</span>
+    </div>
+</div>
+
+<!-- Quick Actions or Recent Activity could go here -->
+<div class="table-container">
+    <!-- Placeholder for recent activity -->
+    <h3>System Status</h3>
+    <p>System is running. Database connection mode: {{ "Active" if session.get('user_id') else "Offline Demo" }}</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadStats();
+</script>
+{% endblock %}

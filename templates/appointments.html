@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block content %}
+<div class="table-header">
+    <h1>Appointments</h1>
+    <button class="btn-primary" style="width: auto;"
+        onclick="alert('Feature coming in v2 (Check code comments for implementation logic)')">
+        <i class="fas fa-plus"></i> Book Appointment
+    </button>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="appointments-table-body">
+            <!-- Placeholder for demo -->
+            <tr>
+                <td colspan="6" style="text-align: center; color: #888;">No appointments found (Database connection
+                    required)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // In a real scenario, this would fetch from /api/appointments
+    // For now we just show the placeholder or fetch if DB is active
+    async function loadAppointments() {
+        const res = await fetch('/api/appointments');
+        const data = await res.json();
+        const tbody = document.getElementById('appointments-table-body');
+
+        if (data.appointments && data.appointments.length > 0) {
+            tbody.innerHTML = '';
+            data.appointments.forEach(a => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${a.patient_name}</td>
+                        <td>${a.doctor_name}</td>
+                        <td>${new Date(a.appointment_date).toLocaleString()}</td>
+                        <td><span style="padding: 4px 8px; background: #dcfce7; color: #166534; border-radius: 4px;">${a.status}</span></td>
+                        <td><button class="btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">View</button></td>
+                    </tr>
+                `;
+            });
+        }
+    }
+    loadAppointments();
+</script>
+{% endblock %}

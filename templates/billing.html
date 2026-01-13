@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Billing{% endblock %}
+
+{% block content %}
+<div class="table-header">
+    <h1>Billing & Invoices</h1>
+    <button class="btn-primary" style="width: auto;">
+        <i class="fas fa-file-invoice"></i> Generate Bill
+    </button>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Patient</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="billing-table-body">
+            <tr>
+                <td colspan="6" style="text-align: center; color: #888;">No bills found</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function loadBills() {
+        const res = await fetch('/api/billing');
+        const data = await res.json();
+        const tbody = document.getElementById('billing-table-body');
+
+        if (data.bills && data.bills.length > 0) {
+            tbody.innerHTML = '';
+            data.bills.forEach(b => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>#INV-${b.id}</td>
+                        <td>${b.patient_name}</td>
+                        <td>$${b.amount}</td>
+                        <td>${new Date(b.bill_date).toLocaleDateString()}</td>
+                        <td><span style="padding: 4px 8px; background: #fee2e2; color: #991b1b; border-radius: 4px;">${b.status}</span></td>
+                        <td><button class="btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Print</button></td>
+                    </tr>
+                `;
+            });
+        }
+    }
+    loadBills();
+</script>
+{% endblock %}

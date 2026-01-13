@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Patients{% endblock %}
+
+{% block content %}
+<div class="table-header">
+    <h1>Patient Management</h1>
+    <button onclick="openModal('addPatientModal')" class="btn-primary" style="width: auto;">
+        <i class="fas fa-plus"></i> Add Patient
+    </button>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="patients-table-body">
+            <!-- Populated by JS -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="addPatientModal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 1.5rem;">Add New Patient</h2>
+        <form id="add-patient-form" onsubmit="addPatient(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="age" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select name="gender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contact Number</label>
+                <input type="text" name="contact" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <textarea name="address" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Medical History</label>
+                <textarea name="history" class="form-control" rows="2"></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button type="button" onclick="closeModal()" class="btn-primary"
+                    style="background-color: #94a3b8;">Cancel</button>
+                <button type="submit" class="btn-primary">Save Patient</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadPatients();
+</script>
+{% endblock %}
